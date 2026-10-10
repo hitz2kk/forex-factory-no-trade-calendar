@@ -316,6 +316,7 @@ def main() -> int:
     parser.add_argument("--minutes-after", type=int, default=15)
     parser.add_argument("--currency", action="append", dest="currencies")
     parser.add_argument("--feed", action="append", dest="feeds")
+    parser.add_argument("--include-next-week", action="store_true")
     args = parser.parse_args()
 
     local_tz = ZoneInfo(args.timezone)
@@ -328,6 +329,11 @@ def main() -> int:
     for feed_url in feeds:
         feed_text = fetch_feed(feed_url)
         all_events.extend(parse_events(feed_text, local_tz))
+
+    if args.include_next_week:
+        from fetch_upcoming_calendar import fetch_next_week
+
+        all_events.extend(parse_json_events(json.dumps(fetch_next_week()), local_tz))
 
     selected = dedupe_events(filter_events(all_events, currencies, start_time, end_time))
     output = Path(args.output)
