@@ -7,7 +7,7 @@ Daily Apple Calendar subscription for high-impact Forex Factory news during the 
 Use this URL in Apple Calendar:
 
 ```text
-https://hitz2kk.github.io/forex-factory-no-trade-calendar/no-trade.ics
+https://raw.githubusercontent.com/hitz2kk/forex-factory-no-trade-calendar/main/no-trade.ics
 ```
 
 ## Rules
