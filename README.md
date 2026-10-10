@@ -1,37 +1,43 @@
 # Forex Factory NO TRADE Calendar
 
-Automatically updated Apple Calendar subscription for high-impact Forex Factory news during the UK trading day.
+Apple Calendar subscription for the entire current UK calendar month, updated from Forex Factory.
 
-## Subscription URL
+## Subscribe
 
-Use this URL in Apple Calendar:
+Use this public URL with **File > New Calendar Subscription** in Apple Calendar:
 
 ```text
 https://raw.githubusercontent.com/hitz2kk/forex-factory-no-trade-calendar/main/no-trade.ics
 ```
 
+Leave username and password blank. Keep the existing subscription if already added. On Mac, Control-click the calendar, choose **Get Info**, and set **Auto-refresh** to **Every 5 minutes** or the shortest available interval. Use **View > Refresh Calendars** to refresh now. Apple controls iPhone/iCloud refresh timing.
+
 ## Rules
 
-- Source: Forex Factory weekly JSON feed, with XML parsing retained as a fallback for compatible feed URLs.
-- Currencies: USD, GBP, and EUR.
-- Impact: high/red-folder only.
-- Time filter: release time between 08:00 and 17:00 UK time after converting from the feed timestamp.
-- Calendar block: 15 minutes before to 15 minutes after each release.
+- Include the whole current month, including elapsed dates, but no previous or next month.
+- Switch to the new month on the first successful check after midnight on the 1st, UK time.
+- USD, GBP and EUR high-impact/red-folder events only.
+- Release time between 08:00 and 17:00 UK time, inclusive: the user's London/New York trading window, not a separate exchange-hours calculation.
+- Automatically handle British Summer Time and GMT, including a clock change within the month.
+- Block 15 minutes before and after each qualifying release. Separate simultaneous releases remain separate entries.
+- Exclude tentative/all-day releases until a reliable time is published. Store them in the snapshot for later rechecking; never invent their time.
 
-## Automation
+## Updates
 
-GitHub Actions checks Forex Factory every five minutes (at minutes 2, 7, 12, and so on through 57 of each hour, UTC). It publishes `no-trade.ics` only when qualifying events or calendar settings change. Changed release times, impact levels, additions, and removals are reflected in the next successful update. Failed or invalid downloads leave the last valid calendar in place and fail the workflow. The workflow also runs after generator changes and can be run manually from the Actions tab.
+The Codex heartbeat on the user's Mac checks the **full current month** every 15 minutes using the public Forex Factory browser page. The Mac must be awake, online and running Codex. It validates every displayed day, imports additions/removals/changed times or impact classifications, regenerates `no-trade.ics`, and pushes changes to this repository. Unchanged checks make no commit. See [BROWSER_UPDATES.md](BROWSER_UPDATES.md) for the repeatable process.
 
-This is periodic checking, not an instant push subscription. Updates must first appear in Forex Factory's public JSON export, then be picked up by GitHub Actions and Apple Calendar. GitHub can delay scheduled runs, so the five-minute schedule is not a guaranteed delivery deadline. The calendar requests a five-minute refresh from clients, but Apple controls the actual refresh timing.
+GitHub Actions runs after snapshot/code changes and on a five-minute schedule, validates the generator, and republishes the current-month calendar from the saved browser snapshot. GitHub cannot read the month page directly (403 when tested); the public JSON export contains only one week. Consequently GitHub alone cannot collect the month or detect source changes. If the Mac is unavailable or Forex Factory blocks the browser, the saved data does not receive new source updates. At a month rollover, an old-month snapshot produces an empty calendar until a valid new-month snapshot arrives, rather than retaining the wrong month.
 
-The public export supplies the current week. A separate next-week export was unavailable when tested. Next week's website listings cannot currently be included in advance; they become available here when the public export rolls forward. An empty future calendar does not establish that there are no high-impact events.
+These are periodic checks, not instant push updates. Codex, GitHub scheduling, public URL caching and Apple refresh timing can delay delivery. Failed or incomplete browser reads preserve the last valid snapshot. A parse failure does not overwrite the published file.
 
-In Apple Calendar on Mac, Control-click this calendar, choose **Get Info**, and set **Auto-refresh** to **Every 5 minutes** (or the shortest available interval). Choose **View > Refresh Calendars** to refresh now. iPhone/iCloud refresh timing is controlled by Apple. Keep your existing subscription URL; leave username and password blank.
+## Local Checks
 
-References: [Apple Calendar refresh settings](https://support.apple.com/en-gb/guide/calendar/icl1024/mac), [GitHub scheduled workflow limitations](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
-
-The generator has no third-party Python dependencies:
+Python standard library only; no browser package is needed in GitHub Actions.
 
 ```bash
-python scripts/generate_no_trade_calendar.py --output no-trade.ics
+python3 -B -m unittest discover -s tests -v
+python3 -B scripts/browser_calendar.py /tmp/forex-month-rows.json
+python3 -B scripts/generate_no_trade_calendar.py --output no-trade.ics
 ```
+
+The importer expects the read-only `READ_MONTH` extraction from `scripts/browser_calendar.py`, plus `display_timezone: "Europe/London"` after verifying the website timezone. The generator uses `data/browser-calendar.json` by default. `--month YYYY-MM` supports reproducible tests. Explicit `--feed URL` remains available for compatible JSON/XML feeds, still filtered to the requested month.

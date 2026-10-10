@@ -8,13 +8,206 @@ X-WR-TIMEZONE:Europe/London
 REFRESH-INTERVAL;VALUE=DURATION:PT5M
 X-PUBLISHED-TTL:PT5M
 BEGIN:VEVENT
-UID:e4a7a1a4467c5bafeb27e5bf@forex-factory-no-trade-calendar
-DTSTAMP:20261010T140913Z
+UID:f739e60632b5aa0530bac304@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261002T121500Z
+DTEND:20261002T124500Z
+SUMMARY:NO TRADE: USD Average Hourly Earnings m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Fri 02 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct2.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:02b08e52b5e80c184573cbe2@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261002T121500Z
+DTEND:20261002T124500Z
+SUMMARY:NO TRADE: USD Non-Farm Employment Change
+DESCRIPTION:Forex Factory red-folder event. Release time: Fri 02 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct2.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c92fb2c3eb8434e917dc7c22@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261002T121500Z
+DTEND:20261002T124500Z
+SUMMARY:NO TRADE: USD Unemployment Rate
+DESCRIPTION:Forex Factory red-folder event. Release time: Fri 02 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct2.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e2350fc65bd8e2f3863cd199@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
 DTSTART:20261008T120000Z
 DTEND:20261008T123000Z
 SUMMARY:NO TRADE: GBP BOE Gov Bailey Speaks
 DESCRIPTION:Forex Factory red-folder event. Release time: Thu 08 Oct 2026 1
- 3:15 BST. Currency: GBP. Impact: High.
+ 3:15 BST. Currency: GBP. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct8.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:df636f77c460ae352d7920c2@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261014T121500Z
+DTEND:20261014T124500Z
+SUMMARY:NO TRADE: USD CPI m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Wed 14 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct14.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d27fbbbd7cbb09b20021a258@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261014T121500Z
+DTEND:20261014T124500Z
+SUMMARY:NO TRADE: USD CPI y/y
+DESCRIPTION:Forex Factory red-folder event. Release time: Wed 14 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct14.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:141fedc28dc5258589e4d4a6@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261014T121500Z
+DTEND:20261014T124500Z
+SUMMARY:NO TRADE: USD Core CPI m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Wed 14 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct14.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:00484dae82d0400cc57a0d38@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261014T121500Z
+DTEND:20261014T124500Z
+SUMMARY:NO TRADE: USD Core CPI y/y
+DESCRIPTION:Forex Factory red-folder event. Release time: Wed 14 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct14.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:1b8e52bfe2d511816217357a@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261015T121500Z
+DTEND:20261015T124500Z
+SUMMARY:NO TRADE: USD Core PPI m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 15 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct15.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fd844a771fc854c65eb8e81f@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261015T121500Z
+DTEND:20261015T124500Z
+SUMMARY:NO TRADE: USD Core Retail Sales m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 15 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct15.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:54fef71c33d828255bb4927a@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261015T121500Z
+DTEND:20261015T124500Z
+SUMMARY:NO TRADE: USD PPI m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 15 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct15.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:aee5b4946b298d2ef7a2013d@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261015T121500Z
+DTEND:20261015T124500Z
+SUMMARY:NO TRADE: USD Retail Sales m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 15 Oct 2026 1
+ 3:30 BST. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct15.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:16f53a577a1b719d4cf01a83@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261029T121500Z
+DTEND:20261029T124500Z
+SUMMARY:NO TRADE: USD Advance GDP q/q
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 29 Oct 2026 1
+ 2:30 GMT. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct29.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a5f579088695a0d6581752d4@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261029T121500Z
+DTEND:20261029T124500Z
+SUMMARY:NO TRADE: USD Core PCE Price Index m/m
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 29 Oct 2026 1
+ 2:30 GMT. Currency: USD. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct29.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:513a7445488d65cb32a6c84b@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261029T130000Z
+DTEND:20261029T133000Z
+SUMMARY:NO TRADE: EUR Main Refinancing Rate
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 29 Oct 2026 1
+ 3:15 GMT. Currency: EUR. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct29.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:1c50aff540729890bf11a8bd@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261029T130000Z
+DTEND:20261029T133000Z
+SUMMARY:NO TRADE: EUR Monetary Policy Statement
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 29 Oct 2026 1
+ 3:15 GMT. Currency: EUR. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct29.2026
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:9c552df0dcf1fa312cedc4be@forex-factory-no-trade-calendar
+DTSTAMP:20261010T143100Z
+DTSTART:20261029T133000Z
+DTEND:20261029T140000Z
+SUMMARY:NO TRADE: EUR ECB Press Conference
+DESCRIPTION:Forex Factory red-folder event. Release time: Thu 29 Oct 2026 1
+ 3:45 GMT. Currency: EUR. Impact: High. Source: https://www.forexfactory.co
+ m/calendar?day=oct29.2026
 TRANSP:OPAQUE
 STATUS:CONFIRMED
 END:VEVENT

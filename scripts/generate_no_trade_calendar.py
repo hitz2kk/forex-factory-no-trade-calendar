@@ -9,7 +9,7 @@ import html
 import json
 import re
 from dataclasses import dataclass
-from datetime import datetime, time as dtime, timedelta, timezone
+from datetime import date, datetime, time as dtime, timedelta, timezone
 from pathlib import Path
 from time import sleep
 from typing import Iterable
@@ -19,11 +19,9 @@ from xml.etree import ElementTree
 from zoneinfo import ZoneInfo
 
 
-DEFAULT_FEEDS = (
-    "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
-)
 DEFAULT_CURRENCIES = ("USD", "GBP", "EUR")
 DEFAULT_OUTPUT = "no-trade.ics"
+DEFAULT_SNAPSHOT = Path(__file__).resolve().parents[1] / "data/browser-calendar.json"
 SOURCE_TIMEZONE = timezone.utc
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -180,12 +178,23 @@ def dedupe_events(events: Iterable[CalendarEvent]) -> list[CalendarEvent]:
     seen: set[tuple[str, datetime, str]] = set()
     deduped: list[CalendarEvent] = []
     for event in events:
-        key = (event.url or event.title, event.release_utc, event.country)
+        key = (event.title, event.release_utc, event.country)
         if key in seen:
             continue
         seen.add(key)
         deduped.append(event)
     return deduped
+
+
+def load_month_snapshot(path: Path, month: date, local_tz: ZoneInfo) -> list[CalendarEvent]:
+    from browser_calendar import validate_snapshot
+
+    snapshot = json.loads(path.read_text(encoding="utf-8"))
+    validate_snapshot(snapshot)
+    if snapshot["month"] != month.strftime("%Y-%m"):
+        print("Waiting for this month's browser update; excluding the previous month")
+        return []
+    return parse_json_events(json.dumps(snapshot["events"]), local_tz) if snapshot["events"] else []
 
 
 def escape_ics(value: str) -> str:
@@ -316,24 +325,24 @@ def main() -> int:
     parser.add_argument("--minutes-after", type=int, default=15)
     parser.add_argument("--currency", action="append", dest="currencies")
     parser.add_argument("--feed", action="append", dest="feeds")
-    parser.add_argument("--include-next-week", action="store_true")
+    parser.add_argument("--snapshot", type=Path, default=DEFAULT_SNAPSHOT)
+    parser.add_argument("--month", help="YYYY-MM; defaults to the current UK month")
     args = parser.parse_args()
 
     local_tz = ZoneInfo(args.timezone)
     currencies = {currency.upper() for currency in (args.currencies or DEFAULT_CURRENCIES)}
     start_time = parse_hhmm(args.start_time)
     end_time = parse_hhmm(args.end_time)
-    feeds = args.feeds or list(DEFAULT_FEEDS)
+    month = date.fromisoformat(args.month + "-01") if args.month else datetime.now(local_tz).date().replace(day=1)
 
     all_events: list[CalendarEvent] = []
-    for feed_url in feeds:
-        feed_text = fetch_feed(feed_url)
-        all_events.extend(parse_events(feed_text, local_tz))
+    if args.feeds:
+        for feed_url in args.feeds:
+            all_events.extend(parse_events(fetch_feed(feed_url), local_tz))
+    else:
+        all_events = load_month_snapshot(args.snapshot, month, local_tz)
 
-    if args.include_next_week:
-        from fetch_upcoming_calendar import fetch_next_week
-
-        all_events.extend(parse_json_events(json.dumps(fetch_next_week()), local_tz))
+    all_events = [event for event in all_events if event.release_local.date().replace(day=1) == month]
 
     selected = dedupe_events(filter_events(all_events, currencies, start_time, end_time))
     output = Path(args.output)

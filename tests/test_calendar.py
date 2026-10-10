@@ -83,7 +83,7 @@ class CalendarTests(unittest.TestCase):
             with self.subTest(invalid=invalid), tempfile.TemporaryDirectory() as directory:
                 output = Path(directory) / "calendar.ics"
                 output.write_text("last valid calendar")
-                with patch.object(sys, "argv", [str(SCRIPT), "--output", str(output)]), \
+                with patch.object(sys, "argv", [str(SCRIPT), "--feed", "https://example.com/feed", "--output", str(output)]), \
                      patch.object(generator, "fetch_feed", return_value=invalid):
                     with self.assertRaises((ValueError, generator.ElementTree.ParseError)):
                         generator.main()

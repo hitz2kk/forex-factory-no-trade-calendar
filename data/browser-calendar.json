@@ -1,0 +1,249 @@
+{
+  "month": "2026-10",
+  "timezone": "Europe/London",
+  "source": "https://www.forexfactory.com/calendar?month=oct.2026",
+  "covered_days": [
+    "Thu Oct 1",
+    "Fri Oct 2",
+    "Sat Oct 3",
+    "Sun Oct 4",
+    "Mon Oct 5",
+    "Tue Oct 6",
+    "Wed Oct 7",
+    "Thu Oct 8",
+    "Fri Oct 9",
+    "Sat Oct 10",
+    "Sun Oct 11",
+    "Mon Oct 12",
+    "Tue Oct 13",
+    "Wed Oct 14",
+    "Thu Oct 15",
+    "Fri Oct 16",
+    "Sat Oct 17",
+    "Sun Oct 18",
+    "Mon Oct 19",
+    "Tue Oct 20",
+    "Wed Oct 21",
+    "Thu Oct 22",
+    "Fri Oct 23",
+    "Sat Oct 24",
+    "Sun Oct 25",
+    "Mon Oct 26",
+    "Tue Oct 27",
+    "Wed Oct 28",
+    "Thu Oct 29",
+    "Fri Oct 30",
+    "Sat Oct 31"
+  ],
+  "updated_at": "2026-10-10T14:31:00.558631+00:00",
+  "events": [
+    {
+      "id": "146936",
+      "title": "Average Hourly Earnings m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-02T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct2.2026"
+    },
+    {
+      "id": "146912",
+      "title": "Non-Farm Employment Change",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-02T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct2.2026"
+    },
+    {
+      "id": "146924",
+      "title": "Unemployment Rate",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-02T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct2.2026"
+    },
+    {
+      "id": "146528",
+      "title": "FOMC Meeting Minutes",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-07T19:00:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct7.2026"
+    },
+    {
+      "id": "154102",
+      "title": "BOE Gov Bailey Speaks",
+      "country": "GBP",
+      "impact": "High",
+      "date": "2026-10-08T13:15:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct8.2026"
+    },
+    {
+      "id": "148337",
+      "title": "CPI m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-14T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct14.2026"
+    },
+    {
+      "id": "148352",
+      "title": "CPI y/y",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-14T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct14.2026"
+    },
+    {
+      "id": "148368",
+      "title": "Core CPI m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-14T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct14.2026"
+    },
+    {
+      "id": "153057",
+      "title": "Core CPI y/y",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-14T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct14.2026"
+    },
+    {
+      "id": "151564",
+      "title": "GDP m/m",
+      "country": "GBP",
+      "impact": "High",
+      "date": "2026-10-15T07:00:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct15.2026"
+    },
+    {
+      "id": "148404",
+      "title": "Core PPI m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-15T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct15.2026"
+    },
+    {
+      "id": "148046",
+      "title": "Core Retail Sales m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-15T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct15.2026"
+    },
+    {
+      "id": "148390",
+      "title": "PPI m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-15T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct15.2026"
+    },
+    {
+      "id": "148034",
+      "title": "Retail Sales m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-15T13:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct15.2026"
+    },
+    {
+      "id": "154973",
+      "title": "BOE Gov Bailey Speaks",
+      "country": "GBP",
+      "impact": "High",
+      "date": "2026-10-16T03:00:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct16.2026"
+    },
+    {
+      "id": "154994",
+      "title": "Fed Chairman Warsh Speaks",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-16T04:30:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct16.2026"
+    },
+    {
+      "id": "151457",
+      "title": "CPI y/y",
+      "country": "GBP",
+      "impact": "High",
+      "date": "2026-10-21T07:00:00+01:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct21.2026"
+    },
+    {
+      "id": "146508",
+      "title": "FOMC Statement",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-28T18:00:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct28.2026"
+    },
+    {
+      "id": "146500",
+      "title": "Federal Funds Rate",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-28T18:00:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct28.2026"
+    },
+    {
+      "id": "146520",
+      "title": "FOMC Press Conference",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-28T18:30:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct28.2026"
+    },
+    {
+      "id": "148274",
+      "title": "Advance GDP q/q",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-29T12:30:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct29.2026"
+    },
+    {
+      "id": "148236",
+      "title": "Core PCE Price Index m/m",
+      "country": "USD",
+      "impact": "High",
+      "date": "2026-10-29T12:30:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct29.2026"
+    },
+    {
+      "id": "150541",
+      "title": "Main Refinancing Rate",
+      "country": "EUR",
+      "impact": "High",
+      "date": "2026-10-29T13:15:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct29.2026"
+    },
+    {
+      "id": "150542",
+      "title": "Monetary Policy Statement",
+      "country": "EUR",
+      "impact": "High",
+      "date": "2026-10-29T13:15:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct29.2026"
+    },
+    {
+      "id": "150540",
+      "title": "ECB Press Conference",
+      "country": "EUR",
+      "impact": "High",
+      "date": "2026-10-29T13:45:00+00:00",
+      "url": "https://www.forexfactory.com/calendar?day=oct29.2026"
+    }
+  ],
+  "untimed_events": [
+    {
+      "id": "150695",
+      "day": "Wed Oct 28",
+      "title": "Autumn Forecast Statement",
+      "country": "GBP"
+    }
+  ]
+}
