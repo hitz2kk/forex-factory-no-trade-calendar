@@ -8,9 +8,6 @@ import hashlib
 import html
 import json
 import re
-import shutil
-import subprocess
-import sys
 from dataclasses import dataclass
 from datetime import datetime, time as dtime, timedelta, timezone
 from pathlib import Path
@@ -24,7 +21,6 @@ from zoneinfo import ZoneInfo
 
 DEFAULT_FEEDS = (
     "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
-    "https://nfs.faireconomy.media/ff_calendar_nextweek.json",
 )
 DEFAULT_CURRENCIES = ("USD", "GBP", "EUR")
 DEFAULT_OUTPUT = "no-trade.ics"
@@ -46,28 +42,21 @@ class CalendarEvent:
     url: str
 
 
-def fetch_feed(url: str) -> str | None:
+def fetch_feed(url: str) -> str:
     request = Request(
         url,
         headers={
             "User-Agent": USER_AGENT,
-            "Accept": "application/xml,text/xml,*/*;q=0.8",
+            "Accept": "application/json,application/xml,text/xml,*/*;q=0.8",
         },
     )
     for attempt in range(1, 4):
         try:
             with urlopen(request, timeout=30) as response:
-                content_type = response.headers.get_content_charset() or "windows-1252"
-                return response.read().decode(content_type, errors="replace")
+                encoding = response.headers.get_content_charset() or "utf-8"
+                return response.read().decode(encoding)
         except HTTPError as error:
-            if error.code == 404:
-                print(f"Skipping unavailable feed: {url}", file=sys.stderr)
-                return None
-            if error.code == 429:
-                curl_text = fetch_feed_with_curl(url)
-                if curl_text is not None:
-                    return curl_text
-            if error.code == 429 and attempt < 3:
+            if error.code in {429, 500, 502, 503, 504} and attempt < 3:
                 sleep(10 * attempt)
                 continue
             raise
@@ -76,39 +65,7 @@ def fetch_feed(url: str) -> str | None:
                 sleep(5 * attempt)
                 continue
             raise RuntimeError(f"Could not fetch {url}: {error}") from error
-    return None
-
-
-def fetch_feed_with_curl(url: str) -> str | None:
-    curl = shutil.which("curl")
-    if not curl:
-        return None
-
-    result = subprocess.run(
-        [
-            curl,
-            "-L",
-            "--fail",
-            "--silent",
-            "--show-error",
-            "--max-time",
-            "30",
-            "-A",
-            USER_AGENT,
-            url,
-        ],
-        capture_output=True,
-        check=False,
-        text=True,
-        encoding="windows-1252",
-        errors="replace",
-    )
-    if result.returncode == 0:
-        return result.stdout
-    if "404" in result.stderr:
-        print(f"Skipping unavailable feed: {url}", file=sys.stderr)
-        return None
-    return None
+    raise RuntimeError(f"Could not fetch {url}")
 
 
 def node_text(node: ElementTree.Element, name: str) -> str:
@@ -139,12 +96,18 @@ def parse_release_time(raw_date: str, raw_time: str) -> datetime | None:
 
 def parse_json_events(feed_text: str, local_tz: ZoneInfo) -> list[CalendarEvent]:
     data = json.loads(feed_text)
+    if not isinstance(data, list) or not data:
+        raise ValueError("Expected a non-empty list of Forex Factory events")
     events: list[CalendarEvent] = []
 
     for item in data:
+        if not isinstance(item, dict) or any(
+            not item.get(field) for field in ("title", "country", "impact", "date")
+        ):
+            raise ValueError("Forex Factory event is missing required fields")
         release = datetime.fromisoformat(str(item.get("date", "")))
         if release.tzinfo is None:
-            release = release.replace(tzinfo=SOURCE_TIMEZONE)
+            raise ValueError("JSON release times must include a timezone offset")
         release_utc = release.astimezone(timezone.utc)
         country = str(item.get("country", "")).strip().upper()
         impact = str(item.get("impact", "")).strip()
@@ -191,7 +154,10 @@ def parse_events(feed_text: str, local_tz: ZoneInfo) -> list[CalendarEvent]:
     stripped = feed_text.lstrip()
     if stripped.startswith("[") or stripped.startswith("{"):
         return parse_json_events(feed_text, local_tz)
-    return parse_xml_events(feed_text, local_tz)
+    events = parse_xml_events(feed_text, local_tz)
+    if not events:
+        raise ValueError("XML feed contains no timed events; keeping existing calendar")
+    return events
 
 
 def filter_events(
@@ -281,8 +247,8 @@ def build_ics(
         "METHOD:PUBLISH",
         "X-WR-CALNAME:Forex Factory NO TRADE",
         "X-WR-TIMEZONE:Europe/London",
-        "REFRESH-INTERVAL;VALUE=DURATION:PT12H",
-        "X-PUBLISHED-TTL:PT12H",
+        "REFRESH-INTERVAL;VALUE=DURATION:PT5M",
+        "X-PUBLISHED-TTL:PT5M",
     ]
 
     for event in events:
@@ -324,6 +290,22 @@ def parse_hhmm(value: str) -> dtime:
     return datetime.strptime(value, "%H:%M").time()
 
 
+def write_calendar(output: Path, calendar: str) -> bool:
+    # Ignore generation timestamps so unchanged news does not create a commit.
+    def content_without_timestamps(value: str) -> list[str]:
+        return [line for line in value.splitlines() if not line.startswith("DTSTAMP:")]
+
+    if output.exists() and content_without_timestamps(
+        output.read_text(encoding="utf-8")
+    ) == content_without_timestamps(calendar):
+        return False
+
+    temporary = output.with_suffix(output.suffix + ".tmp")
+    temporary.write_bytes(calendar.encode("utf-8"))
+    temporary.replace(output)
+    return True
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default=DEFAULT_OUTPUT)
@@ -344,23 +326,22 @@ def main() -> int:
 
     all_events: list[CalendarEvent] = []
     for feed_url in feeds:
-        xml_text = fetch_feed(feed_url)
-        if xml_text:
-            all_events.extend(parse_events(xml_text, local_tz))
+        feed_text = fetch_feed(feed_url)
+        all_events.extend(parse_events(feed_text, local_tz))
 
     selected = dedupe_events(filter_events(all_events, currencies, start_time, end_time))
     output = Path(args.output)
-    output.write_text(
+    changed = write_calendar(
+        output,
         build_ics(
             selected,
             minutes_before=args.minutes_before,
             minutes_after=args.minutes_after,
             generated_at=datetime.now(timezone.utc),
         ),
-        encoding="utf-8",
     )
 
-    print(f"Wrote {len(selected)} events to {output}")
+    print(f"{'Updated' if changed else 'Unchanged'}: {len(selected)} events in {output}")
     return 0
 
 
