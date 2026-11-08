@@ -34,7 +34,7 @@
     "Sun Nov 29",
     "Mon Nov 30"
   ],
-  "updated_at": "2026-11-01T09:05:33.501620+00:00",
+  "updated_at": "2026-11-08T09:02:56.170078+00:00",
   "events": [
     {
       "id": "150723",
@@ -109,24 +109,8 @@
       "url": "https://www.forexfactory.com/calendar?day=nov10.2026"
     },
     {
-      "id": "148353",
-      "title": "CPI y/y",
-      "country": "USD",
-      "impact": "High",
-      "date": "2026-11-10T13:30:00+00:00",
-      "url": "https://www.forexfactory.com/calendar?day=nov10.2026"
-    },
-    {
       "id": "148369",
       "title": "Core CPI m/m",
-      "country": "USD",
-      "impact": "High",
-      "date": "2026-11-10T13:30:00+00:00",
-      "url": "https://www.forexfactory.com/calendar?day=nov10.2026"
-    },
-    {
-      "id": "153058",
-      "title": "Core CPI y/y",
       "country": "USD",
       "impact": "High",
       "date": "2026-11-10T13:30:00+00:00",
